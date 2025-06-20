@@ -162,3 +162,19 @@ impl pallet_template::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 	type WeightInfo = pallet_template::weights::SubstrateWeight<Runtime>;
 }
+
+parameter_types! {
+    pub const MaxCounterValue: u32 = 1000;
+}
+
+/// Configure the pallet-template in custom_pallet/template.
+// impl custom_pallet::Config for Runtime {
+// 	type RuntimeEvent = RuntimeEvent;
+// 	//type WeightInfo = custom_pallet::weights::SubstrateWeight<Runtime>;
+// }
+
+/// Configure the pallet-template in custom_pallet_crud/template.
+impl custom_pallet_crud::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type CounterMaxValue = MaxCounterValue;
+}

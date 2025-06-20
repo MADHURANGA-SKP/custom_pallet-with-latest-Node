@@ -6,8 +6,8 @@ repository = "https://github.com/paritytech/polkadot-sdk-solochain-template.git"
 edition = "2021"
 
 [workspace]
-members = [
-    "node",
+members = [ 
+    "node", "pallets/custom-pallet-crud", 
     "pallets/template",
     "runtime",
 ]
@@ -16,6 +16,10 @@ resolver = "2"
 [workspace.dependencies]
 solochain-template-runtime = { path = "./runtime", default-features = false }
 pallet-template = { path = "./pallets/template", default-features = false }
+
+# custom-pallet = { path = "./pallets/custom-pallet", default-features = false }
+custom-pallet-crud = { path = "./pallets/custom-pallet-crud", default-features = false }
+
 clap = { version = "4.5.13" }
 frame-benchmarking-cli = { version = "47.0.0", default-features = false }
 frame-metadata-hash-extension = { version = "0.8.0", default-features = false }
