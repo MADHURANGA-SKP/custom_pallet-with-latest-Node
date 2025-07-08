@@ -39,6 +39,7 @@ use sp_runtime::{
 	ApplyExtrinsicResult,
 };
 use sp_version::RuntimeVersion;
+use scale_info::prelude::string::String;
 
 // Local module imports
 use super::{
@@ -299,6 +300,23 @@ impl_runtime_apis! {
 
 		fn preset_names() -> Vec<sp_genesis_builder::PresetId> {
 			crate::genesis_config_presets::preset_names()
+		}
+	}
+
+	impl user::runtime_api::UserDetailsApi<Block> for Runtime {
+		fn get_user_details(account: AccountId) -> Option<(String, String, String, u32)> {
+			// Convert to internal AccountId type
+			let acc: AccountId = account.into();
+
+			// Use storage getter and decode BoundedVecs to Strings
+			user::UserDetailsStorage::<Runtime>::get(acc).map(|details| {
+				(
+					String::from_utf8(details.fname.to_vec()).unwrap_or_default(),
+					String::from_utf8(details.lname.to_vec()).unwrap_or_default(),
+					String::from_utf8(details.address.to_vec()).unwrap_or_default(),
+					details.age,
+				)
+			})
 		}
 	}
 }

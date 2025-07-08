@@ -178,3 +178,8 @@ impl custom_pallet_crud::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 	type CounterMaxValue = MaxCounterValue;
 }
+
+impl user::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	//type WeightInfo = user::weights::SubstrateWeight<Runtime>;
+}
