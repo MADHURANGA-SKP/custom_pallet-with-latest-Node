@@ -29,6 +29,7 @@ pallet-sudo.workspace = true
 
 pallet-template.workspace = true
 user = {workspace = true, features = ["runtime-api"]}
+profile = {workspace = true, features = ["runtime-api"]}
 custom-pallet-crud.workspace = true
 
 pallet-timestamp.workspace = true
@@ -73,6 +74,7 @@ std = [
 
 	"pallet-template/std",
 	"user/std",
+	"profile/std",
 	"custom-pallet-crud/std",
 
 	"pallet-timestamp/std",
@@ -108,6 +110,7 @@ runtime-benchmarks = [
 
 	"pallet-template/runtime-benchmarks",
 	"user/runtime-benchmarks",
+	"profile/runtime-benchmarks",
 	"custom-pallet-crud/runtime-benchmarks",
 
 	"pallet-timestamp/runtime-benchmarks",
@@ -127,6 +130,7 @@ try-runtime = [
 
 	"pallet-template/try-runtime",
 	"user/try-runtime",
+	"profile/try-runtime",
 	"custom-pallet-crud/try-runtime",
 
 	"pallet-timestamp/try-runtime",

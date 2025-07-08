@@ -18,6 +18,7 @@ pub mod pallet {
 
     use log::info;
     use scale_info::prelude::string::String;
+    use scale_info::prelude::vec::Vec;
     use frame_system::ensure_signed;
     use frame_support::sp_runtime::BoundedVec;
     use frame_support::{pallet_prelude::{
@@ -228,6 +229,26 @@ pub mod pallet {
             Self::deposit_event(Event::UserDataRemoved { account: who.clone() }); // Or define a `UserDataRemoved` event
 
             Ok(())
+        }
+    }
+
+    // pallets/user/src/lib.rs  
+    pub trait UserApi<AccountId> {
+        fn user_exists(who: &AccountId) -> bool;
+        fn full_name(who: &AccountId) -> Option<(Vec<u8>, Vec<u8>)>;
+    }
+
+    // implementation for the pallet itself
+    impl<T: Config> UserApi<T::AccountId> for Pallet<T> {
+        fn user_exists(who: &T::AccountId) -> bool {
+            UserDetailsStorage::<T>::contains_key(who)
+        }
+        fn full_name(who: &T::AccountId) -> Option<(Vec<u8>, Vec<u8>)> {
+            UserDetailsStorage::<T>::get(who)
+                .map(|d| (
+                    d.fname.to_vec(), 
+                    d.lname.to_vec(),
+                ))
         }
     }
 
