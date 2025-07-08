@@ -319,4 +319,46 @@ impl_runtime_apis! {
 			})
 		}
 	}
+
+	impl profile::runtime_api::ProfileApi<Block> for Runtime {
+		fn get_user_profile(acc: AccountId)
+			-> Option<(
+				AccountId, 
+				String, 
+				String, 
+				String,
+				profile::Gender, 
+				profile::MaritalStatus,
+				String, 
+				profile::BloodType,
+				String, 
+				String, 
+				String,
+				profile::Province, 
+				profile::District,
+				String, String,
+				u32, String
+			)>
+		{
+			profile::Profiles::<Runtime>::get(&acc).map(|p| (
+				acc.clone(),
+				String::from_utf8(p.f_name.to_vec()).unwrap_or_default(),
+				String::from_utf8(p.m_name.to_vec()).unwrap_or_default(),
+				String::from_utf8(p.l_name.to_vec()).unwrap_or_default(),
+				p.gender,
+				p.marital_status,
+				String::from_utf8(p.pf_pic_path.to_vec()).unwrap_or_default(),
+				p.blood_group,
+				String::from_utf8(p.nationality.to_vec()).unwrap_or_default(),
+				String::from_utf8(p.religion.to_vec()).unwrap_or_default(),
+				String::from_utf8(p.lit_lang.to_vec()).unwrap_or_default(),
+				p.province,
+				p.district,
+				String::from_utf8(p.city.to_vec()).unwrap_or_default(),
+				String::from_utf8(p.division.to_vec()).unwrap_or_default(),
+				p.postal_code,
+				String::from_utf8(p.birth_date.to_vec()).unwrap_or_default(),
+			))
+		}
+	}
 }
