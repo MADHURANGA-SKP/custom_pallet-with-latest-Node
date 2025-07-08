@@ -183,3 +183,8 @@ impl user::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 	//type WeightInfo = user::weights::SubstrateWeight<Runtime>;
 }
+
+impl profile::Config for Runtime {
+	type RuntimeEvent = RuntimeEvent;
+	type UserPallet   = user::Pallet<Runtime>;
+}

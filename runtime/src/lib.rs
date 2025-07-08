@@ -232,4 +232,7 @@ mod runtime {
 
 	#[runtime::pallet_index(9)]
 	pub type CustomPalletCrud = custom_pallet_crud;
+
+	#[runtime::pallet_index(10)]
+	pub type Profile = profile;
 }
