@@ -380,15 +380,29 @@ pub mod pallet {
     /* -------------------------------------------------
      *  Runtime-API – lightweight off-chain query
      * ------------------------------------------------- */
-    // #[cfg(feature = "runtime-api")]
-    // pub mod runtime_api {
-    //     use super::*;
-    //     use sp_api::decl_runtime_apis;
+    #[cfg(feature = "runtime-api")]
+    pub mod runtime_api {
+        use super::*;
+        use sp_api::decl_runtime_apis;
+        use sp_std::vec::Vec;        // for raw bytes
+        use frame_support::sp_runtime::AccountId32;
 
-    //     decl_runtime_apis! {
-    //         pub trait ProfileApi<AccountId> {
-    //             fn get_profile(account: AccountId) -> Option<UserProfileData>;
-    //         }
-    //     }
-    // }
+        decl_runtime_apis! {
+            pub trait ProfileApi {
+                fn get_user_profile(acc: AccountId32)
+                    -> Option<(
+                        AccountId32,
+                        String, String, String,        // names
+                        Gender, MaritalStatus,
+                        String,                        // pf_pic_path
+                        BloodType,
+                        String, String, String,        // nationality, religion, lit_lang
+                        Province, District,
+                        String, String,                // city, division
+                        u32,                           // postal_code
+                        String                         // birth_date
+                    )>;
+            }
+        }
+    }
 }
